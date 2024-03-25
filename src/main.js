@@ -583,13 +583,41 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-// Heading Wrapper marquee scroll
-
 document.addEventListener('DOMContentLoaded', function () {
+  // Set initial position of card element
   gsap.to('.heading-wrapper', {
     xPercent: -50,
     ease: 'none',
     duration: 30,
     repeat: -1,
+  })
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Set initial position of card element
+  gsap.to('.about-team-card', {
+    xPercent: -50,
+    ease: 'none',
+    duration: 30,
+    repeat: -1,
+  })
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all team card items
+  var teamCardItems = document.querySelectorAll('.Team-Cards-Item')
+
+  // Create a GSAP timeline
+  var tl = gsap.timeline()
+
+  // Loop through each team card item
+  teamCardItems.forEach(function (item, index) {
+    // Add animation to the timeline with staggered delay
+    tl.to(item, {
+      opacity: 0, // Fade out the item
+      duration: 5.5, // Adjust the duration of the fade out
+      ease: 'power2.inOut', // Adjust the easing function as needed
+      delay: index * 1.5, // Stagger the delay for each item
+    })
   })
 })

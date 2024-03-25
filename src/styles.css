@@ -42,3 +42,11 @@
 .filter-button:hover {
   color: #ff0066; /* Change text color to pink on hover */
 }
+
+.lazy-load {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.lazy-load.is-loaded {
+  opacity: 1;
+}

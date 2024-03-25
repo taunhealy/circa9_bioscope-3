@@ -621,3 +621,44 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 })
+
+// Heading page titles
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all heading elements with the classes 'heading' and 'heading-alt'
+  var headingElements = document.querySelectorAll('.heading, .heading-alt')
+
+  // Set the text of each heading element based on the current page
+  headingElements.forEach(function (heading) {
+    // Get the page title or any other indicator of the current page
+    var pageTitle = document.title
+
+    // Update the innerHTML of the heading element with the page title
+    heading.innerHTML = pageTitle
+  })
+})
+
+// Director image display on director button hover
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Get all filter buttons
+  var filterButtons = document.querySelectorAll('.filter-button')
+
+  // Get all director images
+  var directorImages = document.querySelectorAll('.director-image')
+
+  // Loop through each filter button
+  filterButtons.forEach(function (button, index) {
+    // Add event listener for mouseover event
+    button.addEventListener('mouseover', function () {
+      // Display the corresponding director image
+      directorImages[index].style.display = 'block'
+    })
+
+    // Add event listener for mouseout event
+    button.addEventListener('mouseout', function () {
+      // Hide the corresponding director image
+      directorImages[index].style.display = 'none'
+    })
+  })
+})

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 console.log('JavaScript file is being read.')
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
@@ -499,12 +500,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function setupGridLayoutPattern() {
     const workCards = Array.from(document.querySelectorAll('.work_card')) // Convert NodeList to array
 
-    // Define the layout pattern
     const layoutPattern = [
-      { rows: 1, cols: 1 }, // Card 1: Full width
-      { rows: 1, cols: 2 }, // Card 2: Half width, spans 2 columns
-      { rows: 1, cols: 3 }, // Card 3: Full width, spans 3 columns
-      // Add more patterns as needed
+      { rows: 1, cols: 2 },
+      { rows: 1, cols: 1 },
+      { rows: 1, cols: 2 },
     ]
 
     // Generate an array of indices representing the order
@@ -659,6 +658,38 @@ document.addEventListener('DOMContentLoaded', function () {
     button.addEventListener('mouseout', function () {
       // Hide the corresponding director image
       directorImages[index].style.display = 'none'
+    })
+  })
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  var homeTextElements = document.querySelectorAll('.heading-5')
+
+  homeTextElements.forEach(function (homeText) {
+    homeText.addEventListener('mouseover', function () {
+      gsap.to(homeText, {
+        duration: 0.35,
+        color: '#f06',
+        scale: 1.1,
+        marginBottom: '15px',
+        marginTop: '0px',
+        marginLeft: '18px', // Move text right by 30px on hover
+        transformOrigin: 'left center', // Set transform origin to the left
+        ease: 'power1.inOut',
+      })
+    })
+
+    homeText.addEventListener('mouseout', function () {
+      gsap.to(homeText, {
+        duration: 0.3,
+        color: 'white',
+        scale: 1,
+        marginBottom: '0px',
+        marginTop: '0px',
+        marginLeft: '0px',
+        transformOrigin: 'left center', // Set transform origin to the left
+        ease: 'power3.inOut',
+      })
     })
   })
 })

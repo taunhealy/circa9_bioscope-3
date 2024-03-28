@@ -1,3 +1,28 @@
+/* tablet */
+@media screen and (max-width: 991px) {
+  :root {
+    --section-padding--large: var(--section-padding--large-tablet);
+    --section-padding--medium: var(--section-padding--medium-tablet);
+    --section-padding--small: var(--section-padding--small-tablet);
+  }
+}
+/* mobile landscape*/
+@media screen and (max-width: 767px) {
+  :root {
+    --section-padding--large: var(--section-padding--large-landscape);
+    --section-padding--medium: var(--section-padding--medium-landscape);
+    --section-padding--small: var(--section-padding--small-landscape);
+  }
+}
+/* mobile portrait */
+@media screen and (max-width: 478) {
+  :root {
+    --section-padding--large: var(--section-padding--large-portrait);
+    --section-padding--medium: var(--section-padding--medium-portrait);
+    --section-padding--small: var(--section-padding--small-portrait);
+  }
+}
+
 .js-badge {
   position: fixed;
   top: 32px;
@@ -49,4 +74,31 @@
 }
 .lazy-load.is-loaded {
   opacity: 1;
+}
+
+.button1_letter {
+  color: #ff0066;
+  animation: 2s linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.button1_letter-wrap {
+  animation: rotate 10s linear infinite; /* Adjust duration and timing function as needed */
+}
+
+.work_list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 3fr)
+  ); /* Adjust column width as needed */
+  gap: 20px; /* Adjust gap between grid items as needed */
 }

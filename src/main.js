@@ -107,6 +107,19 @@ document.addEventListener('DOMContentLoaded', function () {
         element.style.color = 'white'
       })
 
+      const directorHeading = document.querySelectorAll(
+        '.director-name_heading'
+      )
+      directorHeading.forEach((element) => {
+        if (directorHeading) {
+          // Fade in #ff0066 color and then fade out to white for director-name_heading
+          const pinkToWhiteForDirectorHeading = gsap.timeline()
+          pinkToWhiteForDirectorHeading
+            .to(directorHeading, { duration: 0.3, color: '#ff0066' }) // Fade in pink color
+            .to(directorHeading, { duration: 0.5, color: 'white' }) // Fade out pink color to white
+        }
+      })
+
       const brandText = this.querySelector('.work_brand')
       if (brandText) {
         brandText.style.opacity = '1'
@@ -114,19 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
         brandText.style.transition =
           'opacity 0.3s ease-in-out, transform 0.2s ease-in-out' // Add transform transition
         brandText.style.transform = 'scale(1.04)' // Scale up brand text
-      }
-
-      const directorHeading = this.querySelector('.director-name_heading')
-      if (directorHeading) {
-        // Fade in #ff0066 color and then fade out to white for director-name_heading
-        const pinkToWhiteForDirectorHeading = gsap.timeline()
-        pinkToWhiteForDirectorHeading
-          .to(directorHeading, { duration: 0.3, color: '#ff0066' }) // Fade in pink color
-          .to(directorHeading, { duration: 0.5, color: 'white' }) // Fade out pink color to white
-
-        // Set initial styles
-        directorHeading.style.opacity = '1'
-        directorHeading.style.display = 'block'
       }
     }
 

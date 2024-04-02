@@ -93,12 +93,11 @@
 .button1_letter-wrap {
   animation: rotate 10s linear infinite; /* Adjust duration and timing function as needed */
 }
-
 .work_list {
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
-    minmax(300px, 3fr)
+    minmax(360px, 9fr)
   ); /* Adjust column width as needed */
   gap: 20px; /* Adjust gap between grid items as needed */
 }

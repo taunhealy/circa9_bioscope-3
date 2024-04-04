@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
       // Change the font size of the text element
       element.style.fontSize = '32px' // Set the font size
       // Change the font family of the text element
-      element.style.fontFamily = 'ppmonumentextended' // Set the font family
-      element.style.fontWeight = 'bold'
+      element.style.fontFamily = 'Clashgrotesk' // Set the font family
+      element.style.fontWeight = '400'
     })
 
     // Handle mouseover and mouseout events for image elements
@@ -125,8 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const brandText = this.querySelector('.work_brand')
       if (brandText) {
-        brandText.style.opacity = '1'
-        brandText.style.color = 'white'
+        brandText.style.color = '#ff0066'
         brandText.style.transition =
           'opacity 0.3s ease-in-out, transform 0.2s ease-in-out' // Add transform transition
         brandText.style.transform = 'scale(1.04)' // Scale up brand text
@@ -494,14 +493,21 @@ document.addEventListener('DOMContentLoaded', function () {
       element.addEventListener('click', handleProjectItemClick) // Added event listener for project item click
     })
   }
+
+  // Add event listeners for Directors work items
+  let directorWorkCards = document.querySelectorAll('work_card is-directors')
+  directorWorkCards.forEach((item) => {
+    item.addEventListener('click', handleProjectItemClick)
+  })
+
   // Select all work cards
   function setupGridLayoutPattern() {
     const workCards = Array.from(document.querySelectorAll('.work_card')) // Convert NodeList to array
 
     const layoutPattern = [
-      { rows: 1, cols: 2 },
-      { rows: 1, cols: 1 },
-      { rows: 1, cols: 2 },
+      { rows: 1, cols: 3 },
+      { rows: 1, cols: 3 },
+      { rows: 1, cols: 3 },
       { rows: 1, cols: 3 },
     ]
 
@@ -657,7 +663,6 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 })
-
 document.addEventListener('DOMContentLoaded', function () {
   var homeTextElements = document.querySelectorAll('.heading-5')
 
@@ -689,3 +694,59 @@ document.addEventListener('DOMContentLoaded', function () {
     })
   })
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+  const homeSliderContainer = document.querySelector('.home_slider_container')
+
+  if (homeSliderContainer) {
+    const homeSliderItems =
+      homeSliderContainer.querySelectorAll('.home_slider_item')
+
+    // Shuffle homeSliderItems
+    shuffleAndAppend(homeSliderItems, homeSliderContainer)
+
+    homeSliderItems.forEach((item, index) => {
+      let heading = item.querySelector('.home_slider_item_heading')
+
+      if (heading) {
+        item.addEventListener('mouseover', function () {
+          heading.style.display = 'block'
+          heading.style.transition = 'transform 0.5s, opacity 1.3s'
+          heading.style.transform = 'scale(1.025)'
+          heading.style.opacity = '0.65'
+        })
+
+        // Add event listener for mouseout event to hide the heading when mouse leaves the item
+        item.addEventListener('mouseout', function () {
+          heading.style.transition = 'opacity 0.3s'
+          heading.style.opacity = '0'
+          heading.style.display = 'none'
+        })
+      } else {
+        console.error(
+          "Heading element not found in one of the '.home_slider_item' elements."
+        )
+      }
+    })
+  } else {
+    console.error('Home slider container not found.')
+  }
+})
+
+// GSAP Animation for homeSlider
+
+const homeSliderWrapper = document.querySelector('.home_slider_wrapper')
+gsap.to(homeSliderWrapper, {
+  xPercent: -150,
+  ease: 'none',
+  duration: 45,
+  repeat: -1,
+})
+
+// Function to shuffle an array and append its elements to a container
+function shuffleAndAppend(array, container) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    container.appendChild(array[j]) // Append child in shuffled order
+  }
+}

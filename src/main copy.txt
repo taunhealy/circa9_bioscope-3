@@ -287,7 +287,12 @@ document.addEventListener('DOMContentLoaded', function () {
         modalBrand.innerText = item.querySelector(
           '.modal_collection-list_brand'
         ).innerText
-
+        modalTitle.innerText = item.querySelector(
+          '.modal_collection-list_title'
+        ).innerText
+        modalImage.src = item
+          .querySelector('.modal_collection-list_image')
+          .getAttribute('src')
         modalDirectorHeading.innerText = item.querySelector(
           '.modal_collection-list_director'
         ).innerText // Set director heading as needed for modal collection list items
@@ -400,7 +405,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     //project item click
-    //project item click
     function handleProjectItemClick(event) {
       const clickedItem = event.currentTarget
 
@@ -475,6 +479,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add event listeners to modal items
     let modalitems = document.querySelectorAll('.modal_collection-list_item')
+
     modalitems.forEach((element) => {
       element.addEventListener('mouseover', handleMouseOver)
       element.addEventListener('mouseout', handleMouseOut)

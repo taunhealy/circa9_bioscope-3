@@ -23,28 +23,46 @@
   }
 }
 
-.js-badge {
-  position: fixed;
-  top: 32px;
-  left: 32px;
-  border-radius: 16px;
-  background-color: lightblue;
-  color: black;
-  padding: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.2;
-  font-size: 14px;
-  cursor: pointer;
-  z-index: 10000;
-  transition: background-color 0.1s ease-out;
+/* Ensure padding and border are included in element's width and height */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.js-badge:hover {
-  background-color: rgb(228, 137, 193);
+/* Prevent horizontal scrolling */
+html,
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure full width for main content, nav, and footer */
+.page-main,
+nav,
+footer {
+  width: 100vw;
+  overflow-x: hidden; /* Prevent any child element from causing overflow */
+}
+
+/* Add global styles for consistency */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif; /* Example font */
+}
+
+/* Example for ensuring no extra spacing around elements */
+.page-main {
+  padding: 0;
+  margin: 0;
+}
+
+/* Ensure other elements inside main are also constrained */
+.page-main > * {
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 .heading {

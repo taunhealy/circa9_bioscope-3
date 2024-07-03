@@ -2,66 +2,18 @@
 console.log('JavaScript file is being read.')
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
-import './styles.css'
-import './page_directors'
-import Vimeo from '@vimeo/player'
-import gsap from 'gsap'
 
 // Initialize event listeners when the DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-  const lenis = new Lenis({
-    // Valeur entre 0 et 1
-    // Valeur par défaut : 0,1
-    // Plus la valeur est faible, plus le scroll sera fluide
-    lerp: 0.07,
-    // Valeur par défaut : 1
-    // Plus la valeur est haute, plus le défilement sera rapide
-    wheelMultiplier: 1,
-  })
+  // Select the modal container
+  const modal = document.querySelector('.modal_container')
+  console.log(modal) // Check if modal is selected
 
-  function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
-  }
-  requestAnimationFrame(raf)
-})
+  setupGridLayoutPattern()
 
-// Select the modal container
-const modal = document.querySelector('.modal_container')
-
-function setImagePositions() {
-  const mainSlides = document.querySelectorAll('.main-slide')
-  const mainCarousel = document.querySelector('.main-carousel')
-  const parallaxPercentage = 100 // Adjust this value as needed
-
-  mainSlides.forEach((targetElement) => {
-    const elementOffset =
-      targetElement.offsetLeft +
-      targetElement.offsetWidth -
-      mainCarousel.offsetLeft
-    const parentWidth = mainCarousel.offsetWidth + targetElement.offsetWidth
-    let myProgress = elementOffset / parentWidth
-    let slideProgress = parallaxPercentage * myProgress
-
-    if (slideProgress > parallaxPercentage) {
-      slideProgress = parallaxPercentage
-    } else if (slideProgress < 0) {
-      slideProgress = 0
-    }
-
-    const imageElement = targetElement.querySelector('.image')
-    if (imageElement) {
-      imageElement.style.transform = `translateX(-${slideProgress}%)`
-    }
-  })
-}
-
-setImagePositions()
-
-// Menu open & close
-document.addEventListener('DOMContentLoaded', function () {
   let isOpen = false
 
+  // Function to initialize event listeners
   // Select the menu button and menu component
   const ham = document.querySelector('.nav_menu-link')
   const menu = document.querySelector('.menu_component_2')
@@ -98,46 +50,42 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Add event listener to toggle the menu on menu button click
-  if (ham && menu) {
-    ham.addEventListener('click', () => {
+
+  // Add event listeners to handle menu hover
+  ham.addEventListener('mouseenter', () => {
+    if (!isOpen) {
       toggleMenu()
-    })
+    }
+  })
 
-    menu.addEventListener('mouseleave', () => {
-      if (isOpen) {
-        toggleMenu()
-      }
-    })
-
-    const menuLinks = document.querySelectorAll('.menu_link_2')
-    // Add event listeners to menu links
-    menuLinks.forEach((link) => {
-      link.addEventListener('click', () => {
-        if (isOpen) {
-          toggleMenu()
-        }
-      })
-    })
-  }
+  menu.addEventListener('mouseleave', () => {
+    if (isOpen) {
+      toggleMenu()
+    }
+  })
 
   // Check localStorage for stored menu state on page load
-  const storedMenuState = localStorage.getItem('menuState')
+  document.addEventListener('DOMContentLoaded', function () {
+    const storedMenuState = localStorage.getItem('menuState')
 
-  // If menu state is stored, initialize menu based on stored state
-  if (storedMenuState === 'open') {
-    // Open the menu
-    toggleMenu()
-  }
+    // If menu state is stored, initialize menu based on stored state
+    if (storedMenuState === 'open') {
+      // Open the menu
+      toggleMenu()
+    }
+  })
 
-  // Change menu text styles
+  //change menu text styles
   const menuTextElements = document.querySelectorAll('.menu_link-text_2')
 
   // Loop through each menu text element
-  menuTextElements.forEach((element) => {})
-})
-
-// Work Cards & Modal
-document.addEventListener('DOMContentLoaded', function () {
+  menuTextElements.forEach((element) => {
+    // Change the font size of the text element
+    element.style.fontSize = '25px' // Set the font size
+    // Change the font family of the text element
+    element.style.fontFamily = 'Clashgrotesk' // Set the font family
+    element.style.fontWeight = '400'
+  })
   // Handle mouseover and mouseout events for image elements
   const workCards = document.querySelectorAll('.work_card')
 
@@ -148,31 +96,28 @@ document.addEventListener('DOMContentLoaded', function () {
     this.style.transform = 'scale(1.010)'
     this.style.opacity = '1'
 
-    const menuTextElements = document.querySelectorAll('.menu_link_2')
-    menuTextElements.forEach((menuTextElement) => {
-      menuTextElement.style.color = 'white'
+    const menuText = document.querySelectorAll('.menu_link_2')
+    menuText.forEach((element) => {
+      element.style.color = 'white'
     })
 
-    const directorHeadingElements = document.querySelectorAll(
-      '.director-name_heading'
-    )
-    directorHeadingElements.forEach((directorHeadingElement) => {
-      // Ensure directorHeadingElement is checked for existence before using
-      if (directorHeadingElement) {
+    const directorHeading = document.querySelectorAll('.director-name_heading')
+    directorHeading.forEach((element) => {
+      if (directorHeading) {
         // Fade in #ff0066 color and then fade out to white for director-name_heading
         const pinkToWhiteForDirectorHeading = gsap.timeline()
         pinkToWhiteForDirectorHeading
-          .to(directorHeadingElement, { duration: 0.3, color: '#ff0066' }) // Fade in pink color
-          .to(directorHeadingElement, { duration: 0.5, color: 'white' }) // Fade out pink color to white
+          .to(directorHeading, { duration: 0.3, color: '#ff0066' }) // Fade in pink color
+          .to(directorHeading, { duration: 0.5, color: 'white' }) // Fade out pink color to white
       }
     })
 
-    const brandTextElement = this.querySelector('.work_brand')
-    if (brandTextElement) {
-      brandTextElement.style.color = '#ff0066'
-      brandTextElement.style.transition =
+    const brandText = this.querySelector('.work_brand')
+    if (brandText) {
+      brandText.style.color = '#ff0066'
+      brandText.style.transition =
         'opacity 0.3s ease-in-out, transform 0.2s ease-in-out' // Add transform transition
-      brandTextElement.style.transform = 'scale(1.04)' // Scale up brand text
+      brandText.style.transform = 'scale(1.04)' // Scale up brand text
     }
   }
 
@@ -201,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
   workCards.forEach((element) => {
     element.addEventListener('mouseover', handleMouseOver)
     element.addEventListener('mouseout', handleMouseOut)
-    element.addEventListener('click', handleProjectItemClick)
+    // Add other event listeners or logic if needed
   })
 
   // Query and loop through all project items
@@ -253,6 +198,20 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentItemIndex < projectItemsArray.length - 1) {
       const modalItem = document.querySelector('.modal-content') // Select the modal item
       const nextItem = projectItemsArray[currentItemIndex + 1] // Select the next item
+
+      // Select the previous button and add event listener
+      const prevButton = document.querySelector('.prev_button')
+      if (prevButton) {
+        prevButton.addEventListener('click', handlePreviousButtonClick)
+      }
+
+      // Select the next button and add event listener
+      const nextButton = document.querySelector('.next_button')
+      if (nextButton) {
+        nextButton.addEventListener('click', handleNextButtonClick)
+      } else {
+        console.error('Next button not found.')
+      }
 
       // Fade out the current modal item and fade in the next item
       gsap.to(modalItem, {
@@ -489,6 +448,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const nextButton = document.querySelector('.next_button')
   if (nextButton) {
     nextButton.addEventListener('click', handleNextButtonClick)
+  } else {
+    console.error('Next button not found.')
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -533,9 +494,41 @@ document.addEventListener('DOMContentLoaded', function () {
   directorWorkCards.forEach((item) => {
     item.addEventListener('click', handleProjectItemClick)
   })
+
+  // Select all work cards
+  function setupGridLayoutPattern() {
+    const workCards = Array.from(document.querySelectorAll('.work_card')) // Convert NodeList to array
+
+    const layoutPattern = [
+      { rows: 1, cols: 3 },
+      { rows: 1, cols: 3 },
+      { rows: 1, cols: 3 },
+      { rows: 1, cols: 3 },
+    ]
+
+    // Generate an array of indices representing the order
+    const indices = Array.from({ length: workCards.length }, (_, i) => i)
+
+    // Iterate over each work card and apply the shuffled layout pattern
+    workCards.forEach((card, index) => {
+      const { rows, cols } =
+        layoutPattern[indices[index] % layoutPattern.length]
+
+      // Apply grid layout
+      card.style.gridRow = `span ${rows}`
+      card.style.gridColumn = `span ${cols}`
+    })
+  }
+
+  // Function to shuffle an array using Fisher-Yates algorithm
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 2))
+      ;[array[i], array[j]] = [array[j], array[i]] // Swap elements
+    }
+  }
 })
 
-// Menu
 document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.menu_link_2').forEach((element) => {
     // Select the text elements to split
@@ -586,25 +579,14 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-// Directors Names
-
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('DOMContentLoaded event fired')
-
-  const headingContainer = document.querySelector('.heading-container')
-  console.log('Heading container:', headingContainer)
-
-  if (headingContainer) {
-    gsap.to('.heading-container', {
-      xPercent: -50,
-      ease: 'none',
-      duration: 30,
-      repeat: -1,
-    })
-    console.log('Animation applied to heading container')
-  } else {
-    console.log('Heading container not found')
-  }
+  // Set initial position of card element
+  gsap.to('.heading-container', {
+    xPercent: -50,
+    ease: 'none',
+    duration: 30,
+    repeat: -1,
+  })
 })
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -640,13 +622,10 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   // Now that the text has been changed, fade in the Heading Wrapper
-  var headingWrapper = document.querySelector('.heading-wrapper')
-
-  if (headingWrapper) {
-    gsap.to(headingWrapper, {
-      opacity: 1,
-    })
-  }
+  var headingWrapper = document.querySelectorAll('.heading-wrapper')
+  gsap.to(headingWrapper, {
+    opacity: 1,
+  })
 })
 
 // Director image display on director button hover
@@ -704,21 +683,18 @@ document.addEventListener('DOMContentLoaded', function () {
       })
     })
   })
-})
 
-// Home Slider Content Animation
-document.addEventListener('DOMContentLoaded', function () {
-  const homeSliderItems = document.querySelectorAll('.home_slider_item')
+  const homeSliderContainer = document.querySelector('.home_slider_container')
+  const homeSliderItems =
+    homeSliderContainer.querySelectorAll('.home_slider_item')
 
-  homeSliderItems.forEach((item) => {
+  homeSliderItems.forEach((item, index) => {
     let heading = item.querySelector('.home_slider_item_heading')
     let image = item.querySelector('.home_slider_item_image')
 
     if (heading && image) {
-      console.log('slider content here')
       heading.style.display = 'block'
       item.addEventListener('mouseover', function () {
-        console.log('Mouse over event triggered')
         gsap.to(heading, {
           duration: 0.5,
           opacity: 0.85,
@@ -732,7 +708,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Add event listener for mouseout event to hide the heading when mouse leaves the item
       item.addEventListener('mouseout', function () {
-        console.log('Mouse out event triggered')
         gsap.to(heading, {
           duration: 0.5,
           opacity: 0,
@@ -750,60 +725,52 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 })
 
-// About Slider Animation
+// GSAP Animation for homeSlider
+
 document.addEventListener('DOMContentLoaded', function () {
+  const homeSliderWrapper = document.getElementById('home-slider-wrapper')
   const tricksSliderWrapper = document.querySelector('.tricks-slider')
-  if (tricksSliderWrapper) {
+  gsap.to(homeSliderWrapper, {
+    xPercent: -150,
+    ease: 'none',
+    duration: 45,
+    repeat: -1,
+  }),
     gsap.to(tricksSliderWrapper, {
       xPercent: -150,
       ease: 'none',
       duration: 45,
       repeat: -1,
+    }),
+    // Function to shuffle an array and append its elements to a container
+    function shuffleAndAppend(array, container) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        container.appendChild(array[j]) // Append child in shuffled order
+      }
+    }
+
+  // Select the contact button element
+  var homeContactButton = document.querySelector('.home_contact-heading_text')
+
+  // Create a GSAP timeline for the flashing effect
+  var flashTimeline = gsap.timeline({ repeat: -1 })
+
+  // Define the flashing animation with 0.5-second delay between flashes
+  flashTimeline
+    .to(homeContactButton, {
+      opacity: 0,
+      duration: 0.3,
+      delay: 0.3,
+      scale: 1,
+      color: '#f06',
+      ease: 'power3.out',
     })
-  }
-})
-
-//setupGridLayoutPattern()
-document.addEventListener('DOMContentLoaded', function () {
-  function setupGridLayoutPattern() {
-    const workCards = Array.from(document.querySelectorAll('.work_card')) // Convert NodeList to array
-
-    const layoutPattern = [
-      { rows: 1, cols: 3 },
-      { rows: 1, cols: 3 },
-      { rows: 1, cols: 3 },
-      { rows: 1, cols: 3 },
-    ]
-
-    // Generate an array of indices representing the order
-    const indices = Array.from({ length: workCards.length }, (_, i) => i)
-
-    // Iterate over each work card and apply the shuffled layout pattern
-    workCards.forEach((card, index) => {
-      const { rows, cols } =
-        layoutPattern[indices[index] % layoutPattern.length]
-
-      // Apply grid layout
-      card.style.gridRow = `span ${rows}`
-      card.style.gridColumn = `span ${cols}`
+    .to(homeContactButton, {
+      opacity: 1,
+      duration: 0.3,
+      color: '#f06',
+      scale: 1,
+      ease: 'power3.out',
     })
-  }
-
-  // Call the function to set up the grid layout
-  setupGridLayoutPattern()
 })
-
-// Home Slider X-move Animation
-document.addEventListener('DOMContentLoaded', function () {
-  const homeSliderWrapper = document.getElementById('home-slider-wrapper')
-  if (homeSliderWrapper) {
-    gsap.to(homeSliderWrapper, {
-      xPercent: -150,
-      ease: 'none',
-      duration: 45,
-      repeat: -1,
-    })
-  }
-})
-
-document.addEventListener('DOMContentLoaded', function () {})

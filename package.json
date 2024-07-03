@@ -24,8 +24,11 @@
   },
   "dependencies": {
     "@barba/core": "^2.9.7",
+    "@vimeo/player": "^2.23.0",
     "barba": "^1.0.0",
+    "flickity": "^3.0.0",
     "gsap": "^3.12.5",
+    "lenis": "^1.1.5",
     "locomotive-scroll": "^4.1.4",
     "split-type": "^0.3.4"
   }

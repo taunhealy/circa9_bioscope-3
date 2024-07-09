@@ -70,17 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function toggleMenu() {
     if (isOpen) {
       // If menu is open, fade out and hide the menu
-      gsap.to(menu, {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: () => {
-          menu.style.display = 'none'
-          isOpen = false
-
-          // Store menu state in localStorage
-          localStorage.setItem('menuState', 'closed')
-        },
-      })
+      menu.style.display = 'none'
+      isOpen = false
     } else {
       // If menu is closed, show and fade in the menu
       menu.style.display = 'block' // Ensure menu is visible before fading in

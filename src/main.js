@@ -127,6 +127,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (storedMenuState === 'open') {
     // Open the menu
     toggleMenu()
+  } else {
+    // Ensure menu is closed on page load if the stored state is 'closed' or not set
+    menu.style.display = 'none'
+    isOpen = false
+    localStorage.setItem('menuState', 'closed')
   }
 
   // Change menu text styles

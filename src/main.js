@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       // If menu is closed, show and fade in the menu
       menu.style.display = 'block' // Ensure menu is visible before fading in
+      console.log('menu opened')
       gsap.to(menu, {
         opacity: 1,
         duration: 0.5,

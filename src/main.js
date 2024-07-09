@@ -69,13 +69,21 @@ document.addEventListener('DOMContentLoaded', function () {
   // Function to toggle menu
   function toggleMenu() {
     if (isOpen) {
-      // If menu is open, fade out and hide the menu
-      menu.style.display = 'none'
-      isOpen = false
+      // If menu is open, hide the menu
+      gsap.to(menu, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => {
+          menu.style.display = 'none'
+          isOpen = false
+
+          // Store menu state in localStorage
+          localStorage.setItem('menuState', 'closed')
+        },
+      })
     } else {
       // If menu is closed, show and fade in the menu
       menu.style.display = 'block' // Ensure menu is visible before fading in
-      console.log('menu opened')
       gsap.to(menu, {
         opacity: 1,
         duration: 0.5,
@@ -87,6 +95,20 @@ document.addEventListener('DOMContentLoaded', function () {
         },
       })
     }
+  }
+
+  // Check localStorage for stored menu state on page load
+  const storedMenuState = localStorage.getItem('menuState')
+
+  // Initialize menu based on stored state or default to closed
+  if (storedMenuState === 'open') {
+    // Open the menu
+    isOpen = true
+    menu.style.display = 'block' // Ensure menu is visible
+  } else {
+    // Close the menu
+    isOpen = false
+    menu.style.display = 'none'
   }
 
   // Add event listener to toggle the menu on menu button click
@@ -110,20 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       })
     })
-  }
-
-  // Check localStorage for stored menu state on page load
-  const storedMenuState = localStorage.getItem('menuState')
-
-  // If menu state is stored, initialize menu based on stored state
-  if (storedMenuState === 'open') {
-    // Open the menu
-    toggleMenu()
-  } else {
-    // Ensure menu is closed on page load if the stored state is 'closed' or not set
-    menu.style.display = 'none'
-    isOpen = false
-    localStorage.setItem('menuState', 'closed')
   }
 
   // Change menu text styles
